@@ -2,42 +2,43 @@ import React, {useState} from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
 
 const App = () => {
-  const [name, setName] = useState('Abdul Basit');
-  const [session, setSession] = useState({number: 6, title: 'state'});
-  const [current, setCurrent] = useState(true);
+  const [name, setName] = useState('Style Test');
 
   const onClickHandler = () => {
-    setName('Programming with Abdul');
-    setSession({number: 7, title: 'Style'});
-    setCurrent(false);
+    setName('Style Test is Done!');
   };
 
   return (
     <View style={styles.body}>
       <Text style={styles.text}>{name}</Text>
-      <Text style={styles.text}>
-        This is session number {session.number} and about {session.title}
-      </Text>
-      <Text style={styles.text}>
-        {current ? 'current session' : 'next session'}
-      </Text>
-      <Button title="Update State" onPress={onClickHandler} />
+      <View style={styles.button}>
+        <Button title="Update State" onPress={onClickHandler} />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   body: {
-    flex: 1,
-    backgroundColor: '#0000ff',
+    width: '100%',
+    height: '50%',
+    backgroundColor: '#ffff00',
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 10,
+    borderColor: '#ff00ff',
+    borderRadius: 10,
   },
   text: {
-    color: '#ffffff',
-    fontSize: 20,
+    color: '#000000',
+    fontSize: 40,
     fontStyle: 'italic',
     margin: 10,
+    textTransform: 'uppercase',
+  },
+  button: {
+    width: 200,
+    height: 60,
   },
 });
 
