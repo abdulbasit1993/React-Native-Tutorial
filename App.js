@@ -11,79 +11,56 @@ import {
   Pressable,
   Alert,
   ToastAndroid,
+  Modal,
 } from 'react-native';
 
 const App = () => {
   const [name, setName] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
 
   const onPressHandler = () => {
     if (name.length > 3) {
       setSubmitted(!submitted);
     } else {
-      // Alert.alert(
-      //   'Warning',
-      //   'The name must be longer than 3 characters',
-      //   [
-      //     {
-      //       text: 'Do not show again',
-      //       onPress: () => console.warn('Do not show again Pressed!'),
-      //     },
-      //     {text: 'Cancel', onPress: () => console.warn('Cancel Pressed!')},
-      //     {text: 'OK', onPress: () => console.warn('OK Pressed!')},
-      //   ],
-      //   {cancelable: true, onDismiss: () => console.warn('Alert dismissed!')},
-      // );
-      // ToastAndroid.show(
-      //   'The name must be longer than 3 characters',
-      //   ToastAndroid.SHORT,
-      // );
-      ToastAndroid.showWithGravity(
-        'The name must be longer than 3 characters',
-        ToastAndroid.LONG,
-        ToastAndroid.CENTER,
-      );
-      // ToastAndroid.showWithGravityAndOffset(
-      //   'The name must be longer than 3 characters',
-      //   ToastAndroid.LONG,
-      //   ToastAndroid.TOP,
-      //   100,
-      //   200,
-      // );
+      setShowWarning(true);
     }
   };
 
   return (
     <View style={styles.body}>
+      <Modal
+        visible={showWarning}
+        transparent
+        onRequestClose={() => setShowWarning(false)}
+        animationType="slide"
+        hardwareAccelerated>
+        <View style={styles.centered_view}>
+          <View style={styles.warning_modal}>
+            <View style={styles.warning_title}>
+              <Text style={styles.text}>WARNING!</Text>
+            </View>
+            <View style={styles.warning_body}>
+              <Text style={styles.text}>
+                The name must be longer than 3 characters
+              </Text>
+            </View>
+            <Pressable
+              onPress={() => setShowWarning(false)}
+              style={styles.warning_button}
+              android_ripple={{color: '#fff'}}>
+              <Text style={styles.text}>OK</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
       <Text style={styles.text}>Please write your name:</Text>
       <TextInput
         style={styles.input}
         placeholder="e.g. John"
         onChangeText={value => setName(value)}
       />
-      {/* <Button
-        title={submitted ? 'Clear' : 'Submit'}
-        onPress={onPressHandler}
-        color="#00f"
-      /> */}
-      {/* <TouchableOpacity
-        style={styles.button}
-        onPress={onPressHandler}
-        activeOpacity={0.5}>
-        <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
-      </TouchableOpacity> */}
-      {/* <TouchableHighlight
-        style={styles.button}
-        onPress={onPressHandler}
-        activeOpacity={0.5}
-        underlayColor="#dddddd">
-        <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
-      </TouchableHighlight> */}
-      {/* <TouchableWithoutFeedback onPress={onPressHandler}>
-        <View style={styles.button}>
-          <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
-        </View>
-      </TouchableWithoutFeedback> */}
+
       <Pressable
         onPress={onPressHandler}
         hitSlop={{top: 10, right: 10, bottom: 10, left: 10}}
@@ -111,6 +88,7 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 20,
     margin: 10,
+    textAlign: 'center',
   },
   input: {
     width: 200,
@@ -125,7 +103,38 @@ const styles = StyleSheet.create({
     width: 150,
     height: 50,
     alignItems: 'center',
-    // backgroundColor: '#00ff00',
+  },
+  centered_view: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#00000099',
+  },
+  warning_modal: {
+    width: 300,
+    height: 300,
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: '#000',
+    borderRadius: 20,
+  },
+  warning_title: {
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ff0',
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+  },
+  warning_body: {
+    height: 200,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  warning_button: {
+    backgroundColor: '#00ffff',
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
 });
 
