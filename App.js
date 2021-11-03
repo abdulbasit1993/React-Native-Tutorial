@@ -9,6 +9,8 @@ import {
   TouchableHighlight,
   TouchableWithoutFeedback,
   Pressable,
+  Alert,
+  ToastAndroid,
 } from 'react-native';
 
 const App = () => {
@@ -16,7 +18,39 @@ const App = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const onPressHandler = () => {
-    setSubmitted(!submitted);
+    if (name.length > 3) {
+      setSubmitted(!submitted);
+    } else {
+      // Alert.alert(
+      //   'Warning',
+      //   'The name must be longer than 3 characters',
+      //   [
+      //     {
+      //       text: 'Do not show again',
+      //       onPress: () => console.warn('Do not show again Pressed!'),
+      //     },
+      //     {text: 'Cancel', onPress: () => console.warn('Cancel Pressed!')},
+      //     {text: 'OK', onPress: () => console.warn('OK Pressed!')},
+      //   ],
+      //   {cancelable: true, onDismiss: () => console.warn('Alert dismissed!')},
+      // );
+      // ToastAndroid.show(
+      //   'The name must be longer than 3 characters',
+      //   ToastAndroid.SHORT,
+      // );
+      ToastAndroid.showWithGravity(
+        'The name must be longer than 3 characters',
+        ToastAndroid.LONG,
+        ToastAndroid.CENTER,
+      );
+      // ToastAndroid.showWithGravityAndOffset(
+      //   'The name must be longer than 3 characters',
+      //   ToastAndroid.LONG,
+      //   ToastAndroid.TOP,
+      //   100,
+      //   200,
+      // );
+    }
   };
 
   return (
