@@ -1,8 +1,23 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, TextInput} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Button,
+  TouchableOpacity,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+  Pressable,
+} from 'react-native';
 
 const App = () => {
   const [name, setName] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
+  const onPressHandler = () => {
+    setSubmitted(!submitted);
+  };
 
   return (
     <View style={styles.body}>
@@ -12,7 +27,42 @@ const App = () => {
         placeholder="e.g. John"
         onChangeText={value => setName(value)}
       />
-      <Text style={styles.text}>Your name is: {name}</Text>
+      {/* <Button
+        title={submitted ? 'Clear' : 'Submit'}
+        onPress={onPressHandler}
+        color="#00f"
+      /> */}
+      {/* <TouchableOpacity
+        style={styles.button}
+        onPress={onPressHandler}
+        activeOpacity={0.5}>
+        <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
+      </TouchableOpacity> */}
+      {/* <TouchableHighlight
+        style={styles.button}
+        onPress={onPressHandler}
+        activeOpacity={0.5}
+        underlayColor="#dddddd">
+        <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
+      </TouchableHighlight> */}
+      {/* <TouchableWithoutFeedback onPress={onPressHandler}>
+        <View style={styles.button}>
+          <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
+        </View>
+      </TouchableWithoutFeedback> */}
+      <Pressable
+        onPress={onPressHandler}
+        hitSlop={{top: 10, right: 10, bottom: 10, left: 10}}
+        android_ripple={{color: '#00f'}}
+        style={({pressed}) => [
+          {backgroundColor: pressed ? '#dddddd' : '#00ff00'},
+          styles.button,
+        ]}>
+        <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
+      </Pressable>
+      {submitted ? (
+        <Text style={styles.text}>You are registered as {name}</Text>
+      ) : null}
     </View>
   );
 };
@@ -35,6 +85,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     textAlign: 'center',
     fontSize: 20,
+    marginBottom: 10,
+  },
+  button: {
+    width: 150,
+    height: 50,
+    alignItems: 'center',
+    // backgroundColor: '#00ff00',
   },
 });
 
