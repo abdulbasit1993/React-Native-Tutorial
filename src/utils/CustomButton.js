@@ -19,7 +19,7 @@ const MyButton = props => {
 
 const styles = StyleSheet.create({
   text: {
-    color: '#000000',
+    color: '#ffffff',
     fontSize: 20,
     margin: 10,
     textAlign: 'center',
@@ -28,6 +28,8 @@ const styles = StyleSheet.create({
     width: 150,
     height: 50,
     alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 10,
   },
 });
 
