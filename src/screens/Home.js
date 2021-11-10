@@ -10,12 +10,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import GlobalStyle from '../utils/GlobalStyle';
-import CustomButton from '../utils/CustomButton';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 import SQLite from 'react-native-sqlite-storage';
 import {useSelector, useDispatch} from 'react-redux';
 import {setName, setAge, increaseAge, getCities} from '../redux/actions';
 import PushNotification from 'react-native-push-notification';
+import CustomButton from '../utils/CustomButton';
 
 const db = SQLite.openDatabase(
   {
@@ -141,6 +141,13 @@ export default function Home({navigation}) {
       <Text style={[GlobalStyle.CustomFont, styles.text]}>
         Welcome {name} !
       </Text>
+      <CustomButton
+        title="Open Camera"
+        color="#0080ff"
+        onPressFunction={() => {
+          navigation.navigate('Camera');
+        }}
+      />
       <FlatList
         data={cities}
         renderItem={({item, index}) => (
