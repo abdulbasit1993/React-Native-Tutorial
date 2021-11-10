@@ -1,21 +1,69 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import Home from './screens/Home';
-import Login from './screens/Login';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import ToDo from './screens/ToDo';
+import Done from './screens/Done';
+import Task from './screens/Task';
+import Splash from './screens/Splash';
 import Map from './screens/Map';
 import Camera from './screens/Camera';
 import {Provider} from 'react-redux';
 import {Store} from './redux/store';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function HomeTabs() {
+  return (
+    <Tab.Navigator
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused, size, color}) => {
+          let iconName;
+          if (route.name === 'To-Do') {
+            iconName = 'clipboard-list';
+            size = focused ? 25 : 20;
+          } else if (route.name === 'Done') {
+            iconName = 'clipboard-check';
+            size = focused ? 25 : 20;
+          }
+          return <FontAwesome5 name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: '#0080ff',
+        tabBarInactiveTintColor: '#777777',
+        tabBarLabelStyle: {
+          fontSize: 15,
+          fontWeight: 'bold',
+        },
+        tabBarStyle: [
+          {
+            display: 'flex',
+          },
+          null,
+        ],
+      })}>
+      <Tab.Screen
+        name={'To-Do'}
+        component={ToDo}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name={'Done'}
+        component={Done}
+        options={{headerShown: false}}
+      />
+    </Tab.Navigator>
+  );
+}
+
+const RootStack = createStackNavigator();
 
 function App() {
   return (
     <Provider store={Store}>
       <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Login"
+        <RootStack.Navigator
+          initialRouteName="Splash"
           screenOptions={{
             headerTitleAlign: 'center',
             headerStyle: {
@@ -27,17 +75,16 @@ function App() {
               fontWeight: 'bold',
             },
           }}>
-          <Stack.Screen
-            name="Login"
-            component={Login}
+          <RootStack.Screen
+            name="Splash"
+            component={Splash}
             options={{
               headerShown: false,
             }}
           />
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Map" component={Map} />
-          <Stack.Screen name="Camera" component={Camera} />
-        </Stack.Navigator>
+          <RootStack.Screen name="My Tasks" component={HomeTabs} />
+          <RootStack.Screen name="Task" component={Task} />
+        </RootStack.Navigator>
       </NavigationContainer>
     </Provider>
   );
