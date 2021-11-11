@@ -84,6 +84,7 @@ function App() {
           />
           <RootStack.Screen name="My Tasks" component={HomeTabs} />
           <RootStack.Screen name="Task" component={Task} />
+          <RootStack.Screen name="Camera" component={Camera} />
         </RootStack.Navigator>
       </NavigationContainer>
     </Provider>
