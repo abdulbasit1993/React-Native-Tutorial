@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import PushNotification from 'react-native-push-notification';
-import GlobalStyle from '../utils/GlobalStyle';
+import SplashScreenLogo from '../../assets/images/logo_transparent.png';
 
 export default function Splash({navigation}) {
   useEffect(() => {
@@ -20,13 +20,7 @@ export default function Splash({navigation}) {
 
   return (
     <View style={styles.body}>
-      <Image
-        style={styles.logo}
-        source={require('../../assets/checklist.png')}
-      />
-      <Text style={[GlobalStyle.CustomFontBig, styles.text]}>
-        Abdul To-Do List
-      </Text>
+      <Image source={SplashScreenLogo} resizeMode="center" />
     </View>
   );
 }
@@ -36,15 +30,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#0080ff',
-  },
-  logo: {
-    width: 150,
-    height: 150,
-    margin: 20,
-  },
-  text: {
-    fontSize: 40,
-    color: '#ffffff',
+    backgroundColor: '#007FFF',
   },
 });
