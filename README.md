@@ -2,6 +2,6 @@
 
 React Native Tutorial App Project
 
-# Tutorial Link:
+# Download Link:
 
-https://www.youtube.com/playlist?list=PL8kfZyp--gEXs4YsSLtB3KqDtdOFHMjWZ
+[Click Here](https://drive.google.com/file/d/1E6iM6BdQ7Y1V7CFFQTFGBCWnM8dK128r/view) to download the APK file for Android devices.
